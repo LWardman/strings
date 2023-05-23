@@ -43,7 +43,7 @@ bool isPalindrome(string s)
  * @param txt The string that the function will reverse.
  * @returns txt in reverse order, eg: "hello" becomes "olleh".
  */
-string reverseString(string txt)
+string reverseString(const string& txt)
 {
     // Temporary string which will contain the reversed string.
     // We use a temp string because reversing in place will likely lead to loss of information.
@@ -58,6 +58,35 @@ string reverseString(string txt)
     return reversed;
 }
 
+/**
+ * * A function to rotate a string, meaning that each letter in the string gets sent to the next letter in the alphabet.
+ *
+ *  * For example. "abc" returns "bcd", "maze" returns "nbaf". Importantly, "z" rotates to "a"/
+ *
+ *  * Uses ASCII conversions to handle the rotation of each character.
+ *
+ * @param txt The string to be rotated.
+ * @returns The rotated string.
+ */
+string rotateString(const string& txt)
+{
+    string rotatedString;
+
+    for (char letter : txt)
+    {
+        char ch = letter + 1;
+
+        if (ch == '{') // '{' comes after z.
+        {
+            ch = 'a';
+        }
+
+        rotatedString.push_back(ch);
+    }
+
+    return rotatedString;
+}
+
 
 int main()
 {
@@ -66,6 +95,9 @@ int main()
 
     string s2 = "hello";
     std::cout << reverseString(s2) << std::endl;
+
+    string s3 = "maze";
+    std::cout << rotateString(s3) << std::endl;
 
     return 0;
 }
