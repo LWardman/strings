@@ -87,6 +87,55 @@ string rotateString(const string& txt)
     return rotatedString;
 }
 
+/**
+ * * This function capitalizes a string, which can be useful to transform a string into a more formal string.
+ *   Note that this capitalizes ALL words in the sentence. Requires that only single spaces are used between words.
+ *
+ * * This will be done by comparing ASCII values and doing a conversion if a letter falls into a certain ASCII range.
+ *
+ * * e.g "hello there" -> "Hello There"
+ *
+ * @param txt The sentence to capitalize.
+ * @returns The capitalized version of the input string.
+ */
+string capitalizeString(const string& txt)
+{
+    string capitalString;
+
+    bool bFollowsWhiteSpace = true;
+
+    int ASCII_CONVERTER = -32;      // takes a lower case letter to its capital version.
+
+    int a = 97;                     // ASCII value of a is 97.
+    int z = 122;                    // ASCII value of z is 122.
+
+    for (char letter : txt)
+    {
+        if (bFollowsWhiteSpace)
+        {
+            if (a <= letter <= z)
+            {
+                capitalString.push_back(letter + ASCII_CONVERTER);
+            }
+            else
+            {
+                capitalString.push_back(letter);
+            }
+
+            bFollowsWhiteSpace = false;
+        }
+        else
+        {
+            if (letter == ' ')
+            {
+                bFollowsWhiteSpace = true;
+            }
+            capitalString.push_back(letter);
+        }
+    }
+    return capitalString;
+}
+
 
 int main()
 {
@@ -98,6 +147,9 @@ int main()
 
     string s3 = "maze";
     std::cout << rotateString(s3) << std::endl;
+
+    string s4 = "hello there";
+    std::cout << capitalizeString(s4) << std::endl;
 
     return 0;
 }
