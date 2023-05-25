@@ -106,8 +106,8 @@ string capitalizeString(const string& txt)
 
     int ASCII_CONVERTER = -32;      // takes a lower case letter to its capital version.
 
-    int a = 97;                     // ASCII value of a is 97.
-    int z = 122;                    // ASCII value of z is 122.
+    int a = 97;                     // ASCII value of 'a' is 97.
+    int z = 122;                    // ASCII value of 'z' is 122.
 
     for (char letter : txt)
     {
@@ -136,6 +136,47 @@ string capitalizeString(const string& txt)
     return capitalString;
 }
 
+/**
+ * * Finds the longest word in a sentence (string). Accepts one word inputs, but will return the same input.
+ *
+ * * Finds the longest word by iterating through the letters in the string.
+ *   If the current char is a whitespace, it checks to see if the word prior to the whitespace is longer than the
+ *   current longest word. Then it empties the current word to keep track of the next word.
+ *
+ * * To get value from this function the user should input a sentence with whitespaces.
+ *
+ * @param txt The input sentence to find the longest word in.
+ * @returns The longest word in the sentence.
+ */
+string largestWordInString(string txt)
+{
+    string largestWord;
+    string currWord;
+
+    for (char letter : txt)
+    {
+        if (letter == ' ')
+        {
+            if (currWord.size() > largestWord.size())
+            {
+                largestWord = currWord;
+            }
+            currWord.clear();
+        }
+        else
+        {
+            currWord.push_back(letter);
+        }
+    }
+
+    if (largestWord.empty())
+    {
+        largestWord = currWord;
+    }
+
+    return largestWord;
+}
+
 
 int main()
 {
@@ -150,6 +191,9 @@ int main()
 
     string s4 = "hello there";
     std::cout << capitalizeString(s4) << std::endl;
+
+    string s5 = "what wonderful words";
+    std::cout << largestWordInString(s5) << std::endl;
 
     return 0;
 }
