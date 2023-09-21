@@ -1,37 +1,8 @@
 #include <iostream>
 #include <string>
 #include <algorithm>
-#include <ranges>
 
 using std::string;
-
-bool isPalindrome(string s)
-{
-    for (int i = 0, len = s.size(); i < len; i++)
-    {
-        if (ispunct(s[i]) || isspace(s[i]))
-        {
-            s.erase(i--, 1);
-            len = s.size();
-        }
-    }
-
-    std::cout << s << std::endl;
-
-    int frontIdx = 0;
-    int backIdx = s.size() - 1;
-
-    while (frontIdx < backIdx)
-    {
-        if (s[frontIdx] != s[backIdx])
-        {
-            return false;
-        }
-        frontIdx++;
-        backIdx--;
-    }
-    return true;
-}
 
 /**
  * * A function to reverse a given string, meaning that the character at the final index now belongs to the end index.
@@ -52,6 +23,19 @@ string reverseString(const string& txt)
     std::ranges::reverse_copy(txt.begin(), txt.end(), reversed.begin());
 
     return reversed;
+}
+
+bool isPalindrome(const string& s)
+{
+    string inputCopy = s;
+
+    std::ranges::remove_if(inputCopy.begin(), inputCopy.end(), ispunct); // Cleans up punctuation
+    std::ranges::remove_if(inputCopy.begin(), inputCopy.end(), isspace); // Cleans up whitespace
+
+    std::transform(inputCopy.begin(), inputCopy.end(), inputCopy.begin(),
+                   [](unsigned char c){return std::tolower(c);});
+
+    return inputCopy == reverseString(inputCopy);
 }
 
 /**
