@@ -116,31 +116,13 @@ string capitalizeString(const string& txt)
  */
 string largestWordInString(string txt)
 {
-    string largestWord;
-    string currWord;
+    std::vector<string> words = separateStringIntoWords(txt);
 
-    for (char letter : txt)
-    {
-        if (letter == ' ')
-        {
-            if (currWord.size() > largestWord.size())
-            {
-                largestWord = currWord;
-            }
-            currWord.clear();
-        }
-        else
-        {
-            currWord.push_back(letter);
-        }
-    }
+    std::ranges::sort(words.begin(), words.end(),
+                      [](const string& lhs, const string& rhs)
+                      {return lhs.size() > rhs.size();});
 
-    if (largestWord.empty())
-    {
-        largestWord = currWord;
-    }
-
-    return largestWord;
+    return words[0];
 }
 
 
