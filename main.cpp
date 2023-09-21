@@ -1,5 +1,7 @@
 #include <iostream>
 #include <string>
+#include <algorithm>
+#include <ranges>
 
 using std::string;
 
@@ -45,15 +47,9 @@ bool isPalindrome(string s)
  */
 string reverseString(const string& txt)
 {
-    // Temporary string which will contain the reversed string.
-    // We use a temp string because reversing in place will likely lead to loss of information.
-    string reversed;
+    string reversed(txt.size(), ' ');
 
-    // Iterating over the string, starting at the final element and working towards the first.
-    for (int idx = txt.size() - 1; idx >= 0; idx--)
-    {
-        reversed.push_back(txt[idx]);
-    }
+    std::ranges::reverse_copy(txt.begin(), txt.end(), reversed.begin());
 
     return reversed;
 }
