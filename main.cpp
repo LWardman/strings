@@ -86,40 +86,20 @@ std::vector<string> separateStringIntoWords(const string& txt)
  */
 string capitalizeString(const string& txt)
 {
-    string capitalString;
+    std::vector<string> splitString = separateStringIntoWords(txt);
 
-    bool bFollowsWhiteSpace = true;
+    string capitalizedString;
 
-    int ASCII_CONVERTER = -32;      // takes a lower case letter to its capital version.
-
-    int a = 97;                     // ASCII value of 'a' is 97.
-    int z = 122;                    // ASCII value of 'z' is 122.
-
-    for (char letter : txt)
+    for (string word : splitString)
     {
-        if (bFollowsWhiteSpace)
-        {
-            if (a <= letter <= z)
-            {
-                capitalString.push_back(letter + ASCII_CONVERTER);
-            }
-            else
-            {
-                capitalString.push_back(letter);
-            }
-
-            bFollowsWhiteSpace = false;
-        }
-        else
-        {
-            if (letter == ' ')
-            {
-                bFollowsWhiteSpace = true;
-            }
-            capitalString.push_back(letter);
-        }
+        word[0] = std::toupper(word[0]);
+        capitalizedString += word;
+        capitalizedString += ' ';
     }
-    return capitalString;
+
+    capitalizedString.erase(capitalizedString.end() - 1, capitalizedString.end());
+
+    return capitalizedString;
 }
 
 /**
