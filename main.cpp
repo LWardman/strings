@@ -46,6 +46,34 @@ string rotateString(const string& txt)
 }
 
 /**
+ *  e.g "My name is" returns {"My", "name", "is"}.
+ *
+ * @param txt The (ideally multiple worded) string.
+ * @return a vector of each individual word in the string.
+ */
+std::vector<string> separateStringIntoWords(const string& txt)
+{
+    string inputCopy = txt;
+
+    std::vector<string> words;
+
+    // initializing variables
+    int start, end;
+    start = end = 0;
+
+    char space = ' ';
+
+    while ((start = inputCopy.find_first_not_of(space, end)) != string::npos)
+    {
+        end = inputCopy.find(space, start);
+
+        words.push_back(inputCopy.substr(start, end - start));
+    }
+
+    return words;
+}
+
+/**
  * * This function capitalizes a string, which can be useful to transform a string into a more formal string.
  *   Note that this capitalizes ALL words in the sentence. Requires that only single spaces are used between words.
  *
@@ -147,11 +175,17 @@ int main()
     string s3 = "maze";
     std::cout << rotateString(s3) << std::endl;
 
-    string s4 = "hello there";
-    std::cout << capitalizeString(s4) << std::endl;
+    string s4 = "My name is";
+    for (const string& word : separateStringIntoWords(s4))
+    {
+        std::cout << word << std::endl;
+    }
 
-    string s5 = "what wonderful words";
-    std::cout << largestWordInString(s5) << std::endl;
+    string s5 = "hello there";
+    std::cout << capitalizeString(s5) << std::endl;
+
+    string s6 = "what wonderful words";
+    std::cout << largestWordInString(s6) << std::endl;
 
     return 0;
 }
