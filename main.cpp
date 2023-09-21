@@ -4,18 +4,7 @@
 
 using std::string;
 
-/**
- * * A function to reverse a given string, meaning that the character at the final index now belongs to the end index.
- *
- * * Can be used as an alternative to isPalindrome by using if ( string1 == reverseString(string1)),
- *   however this will be case and whitespace sensitive, so more information on the string would be required.
- *
- * * Will be done by creating a temporary string and iterating over the string in reverse order, will make use of
- *   the push_back() function.
- *
- * @param txt The string that the function will reverse.
- * @returns txt in reverse order, eg: "hello" becomes "olleh".
- */
+
 string reverseString(const string& txt)
 {
     string reversed(txt.size(), ' ');
@@ -39,9 +28,9 @@ bool isPalindrome(const string& s)
 }
 
 /**
- * * A function to rotate a string, meaning that each letter in the string gets sent to the next letter in the alphabet.
+ * * Rotating a string means that each letter in the string gets sent to the next letter in the alphabet.
  *
- *  * For example. "abc" returns "bcd", "maze" returns "nbaf". Importantly, "z" rotates to "a"/
+ *  * For example. "abc" returns "bcd", "maze" returns "nbaf". Importantly, "z" rotates to "a".
  *
  *  * Uses ASCII conversions to handle the rotation of each character.
  *
@@ -50,21 +39,12 @@ bool isPalindrome(const string& s)
  */
 string rotateString(const string& txt)
 {
-    string rotatedString;
+    string inputCopy = txt;
 
-    for (char letter : txt)
-    {
-        char ch = letter + 1;
+    std::transform(inputCopy.begin(), inputCopy.end(), inputCopy.begin(),
+                   [](unsigned char c){c++; if (c == '{') c = 'a'; return c;});
 
-        if (ch == '{') // '{' comes after z.
-        {
-            ch = 'a';
-        }
-
-        rotatedString.push_back(ch);
-    }
-
-    return rotatedString;
+    return inputCopy;
 }
 
 /**
