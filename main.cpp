@@ -53,21 +53,18 @@ string rotateString(const string& txt)
  */
 std::vector<string> separateStringIntoWords(const string& txt)
 {
-    string inputCopy = txt;
-
     std::vector<string> words;
 
-    // initializing variables
-    int start, end;
-    start = end = 0;
+    int start = 0;
+    int end = 0;
 
     char space = ' ';
 
-    while ((start = inputCopy.find_first_not_of(space, end)) != string::npos)
+    while ((start = txt.find_first_not_of(space, end)) != string::npos)
     {
-        end = inputCopy.find(space, start);
+        end = txt.find(space, start);
 
-        words.push_back(inputCopy.substr(start, end - start));
+        words.push_back(txt.substr(start, end - start));
     }
 
     return words;
@@ -114,7 +111,7 @@ string capitalizeString(const string& txt)
  * @param txt The input sentence to find the longest word in.
  * @returns The longest word in the sentence.
  */
-string largestWordInString(string txt)
+string largestWordInString(const string& txt)
 {
     std::vector<string> words = separateStringIntoWords(txt);
 
