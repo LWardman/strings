@@ -32,8 +32,6 @@ bool isPalindrome(const string& s)
  *
  *  * For example. "abc" returns "bcd", "maze" returns "nbaf". Importantly, "z" rotates to "a".
  *
- *  * Uses ASCII conversions to handle the rotation of each character.
- *
  * @param txt The string to be rotated.
  * @returns The rotated string.
  */
